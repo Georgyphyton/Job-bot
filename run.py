@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart
 from job_bot.handlers import jsonmessages
+from job_bot.filters.jsonfilter import FilterNotJson
 from dotenv import load_dotenv
 import os
 import logging
@@ -14,6 +15,7 @@ async def start() -> None:
     bot = Bot(TOKEN)
     dp = Dispatcher()
     dp.message.register(jsonmessages.get_start, CommandStart())
+    dp.message.register(jsonmessages.answer_not_json, FilterNotJson())
     logging.basicConfig(level=logging.INFO)
     try:
         await dp.start_polling(bot)
