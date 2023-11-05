@@ -10,6 +10,8 @@ packages = [{include = "job_bot"}]
 python = "^3.10"
 flake8 = "^6.1.0"
 aiogram = "^3.1.1"
+pymongo = "^4.6.0"
+python-dotenv = "^1.0.0"
 
 
 [build-system]
