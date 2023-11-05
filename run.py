@@ -17,6 +17,7 @@ async def start() -> None:
     dp.message.register(jsonmessages.get_start, CommandStart())
     dp.message.register(jsonmessages.answer_not_json, FilterNotJson())
     dp.message.register(jsonmessages.answer_invalid_format, FilterDict())
+    dp.message.register(jsonmessages.get_result)
     logging.basicConfig(level=logging.INFO)
     try:
         await dp.start_polling(bot)
