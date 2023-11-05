@@ -57,4 +57,13 @@ async def get_result(message: types.Message) -> None:
         {"$project":
          {"_id": 0, "dataset": 1, "labels": 1}}
     ]))[0]
+
+    ind = 0
+    while max_time >= min_time:
+        date = datetime.strftime(min_time, "%Y-%m-%dT%H:%M:%S")
+        if date not in agr_data['labels']:
+            agr_data['labels'].insert(ind, date)
+            agr_data['dataset'].insert(ind, 0)
+        min_time += formats[dt][1]
+        ind += 1
     await message.answer(json.dumps(agr_data))
