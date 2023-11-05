@@ -1,7 +1,6 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
-import bson
 import os
 
 load_dotenv()
@@ -9,8 +8,9 @@ uri = os.getenv('DATABASE_URL',)
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['user']
 coll = db['users']
-coll.drop()
 
-with open('job_bot/data/sample_collection.bson', 'rb') as bson_file:
-    bson_data = bson.decode_all(bson_file.read())
-    coll.insert_many(bson_data)
+if coll.find_one():
+    min_time = list(coll.aggregate(
+        [{"$group": {"_id": 1, "min_time": {"$min": "$dt"}}}]))[0]['min_time']
+    max_time = list(coll.aggregate(
+        [{"$group": {"_id": 1, "max_time": {"$max": "$dt"}}}]))[0]['max_time']
