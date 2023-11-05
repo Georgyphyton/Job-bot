@@ -16,7 +16,7 @@ Input data format:
 
 Clone the repository:
 
-`git@github.com:Georgyphyton/SSS.git`
+`git@github.com:Georgyphyton/Job-bot.git`
 
 Go to the project folder:
 
